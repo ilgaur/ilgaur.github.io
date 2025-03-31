@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome to My Technical Blog"
 date:   2025-03-26 12:00:00 -0500
-categories: jekyll updates
+categories: blog-updates
 ---
 
 # Welcome to My Technical Explorations
