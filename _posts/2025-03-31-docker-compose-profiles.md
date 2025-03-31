@@ -5,8 +5,6 @@ date: 2025-03-31 02:23:00 +0000
 categories: technical-writeups
 ---
 
-# Achieving a Higher Degree of Deployment Modularity with Docker Compose Profiles
-
 Have you ever found yourself juggling multiple versions of docker-compose files for different environments? I recently faced this challenge when working on a project many deployment environments. We were struggling with limited resources, sometimes needing to run dev and staging on the same server without conflicts.
 
 This was the the time when I found an overlooked Docker compose feature, Compose profiles - a feature that turned out to be exactly what we needed. I will be demonstrating how this helped us create a cleaner, more modular approach to deployment.
