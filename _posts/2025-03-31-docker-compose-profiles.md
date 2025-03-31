@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Docker Compose Profiles: A Simple Solution for Multi-Environment Deployments"
+title: "Achieving a Higher Degree of Deployment Modularity with Docker Compose Profiles"
 date: 2025-03-31 02:23:00 +0000
 categories: technical-writeups
 ---
 
-# Docker Compose Profiles: A Simple Solution for Multi-Environment Deployments
+# Achieving a Higher Degree of Deployment Modularity with Docker Compose Profiles
 
 Have you ever found yourself juggling multiple versions of docker-compose files for different environments? I recently faced this challenge when working on a project many deployment environments. We were struggling with limited resources, sometimes needing to run dev and staging on the same server without conflicts.
 
@@ -39,14 +39,13 @@ services:
   # Core application
   app:
     image: my-web-app:${APP_VERSION:-latest}
-    container_name: ${ENV:-local}-web-app
+    container_name: ${ENV}-web-app
     ports:
-      - "${APP_PORT:-3000}:3000"
+      - "${APP_PORT}:3000"
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - NODE_ENV=${ENV:-development}
     depends_on:
       - db
     profiles: ["dev", "staging", "prod"]
@@ -54,26 +53,24 @@ services:
   # Database
   db:
     image: postgres:14
-    container_name: ${ENV:-local}-db
+    container_name: ${ENV}-db
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME:-app_db}
+      - POSTGRES_DB=${DB_NAME}
     volumes:
       - db-data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT:-5432}:5432"
     profiles: ["dev", "staging", "prod", "local"]
 
   # Database admin tool - only for development
   db-admin:
     image: dpage/pgadmin4:latest
-    container_name: ${ENV:-local}-db-admin
+    container_name: ${ENV}-db-admin
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${ADMIN_EMAIL:-admin@example.com}
-      - PGADMIN_DEFAULT_PASSWORD=${ADMIN_PASSWORD:-adminpass}
+      - PGADMIN_DEFAULT_EMAIL=${ADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${ADMIN_PASSWORD}
     ports:
-      - "${ADMIN_PORT:-5050}:80"
+      - "${ADMIN_PORT}:80"
     depends_on:
       - db
     profiles: ["dev", "local"]
@@ -92,7 +89,6 @@ DB_USER=dev_user
 DB_PASSWORD=dev_pass
 DB_NAME=app_db
 APP_PORT=5070
-DB_PORT=5060
 ADMIN_EMAIL=dev@example.com
 ADMIN_PASSWORD=dev_pass
 ADMIN_PORT=5050
@@ -137,6 +133,6 @@ Consider using Docker Compose profiles when:
 
 ## Final Thoughts
 
-Docker Compose profiles have simplified our deployment workflow considerably. No more juggling multiple compose files or struggling with environment-specific configurations.
+Compose profiles have simplified our deployment workflow considerably. No more juggling multiple compose files or struggling with environment-specific configurations.
 
 If you're dealing with similar challenges, give profiles a try. For more details, check out the [official Docker documentation on profiles](https://docs.docker.com/compose/how-tos/profiles/).
