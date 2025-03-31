@@ -5,8 +5,6 @@ date:   2025-03-26 12:00:00 -0500
 categories: welcome
 ---
 
-# Welcome to My Technical Blog
-
 ## Why This Blog
 
 I'm Ilgar, a DevOps engineer with a curiosity-driven approach to technology. This blog will be my space to document insights, share solutions, and explore the ever-evolving tech landscape.
