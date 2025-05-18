@@ -5,8 +5,6 @@ date: 2025-05-17 12:06:00 +0000
 categories: technical-writeups
 ---
 
-# Replicating docker volumes: A Late-Night Hack
-
 So there I was at 2 AM, another cup of tea down, trying to get a Postgres database from one Docker container to another. Same server, should be easy right? Yeah, no.
 
 Tried the whole `pg_dump` thing first. Faced some errors while importing the dump. The usual headache. And honestly? I was way too tired to debug the esoteric dump errors properly.
