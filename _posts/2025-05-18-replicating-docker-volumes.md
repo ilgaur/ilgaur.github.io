@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Welcome to My Technical Blog"
-date:   2025-03-26 12:00:00 -0500
-categories: welcome
+title:  "Replicating docker volumes: A Late-Night Hack"
+date:   2025-05-26 12:00:00 -0500
+categories: technical-writeups
 ---
 
 # Replicating docker volumes: A Late-Night Hack
