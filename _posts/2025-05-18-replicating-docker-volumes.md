@@ -9,7 +9,7 @@ categories: technical-writeups
 
 So there I was at 2 AM, another cup of tea down, trying to get a Postgres database from one Docker container to another. Same server, should be easy right? Yeah, no.
 
-Tried the whole pg_dump thing first. Connection errors. Permission issues. The usual headache. And honestly? I was way too tired to debug the esoteric dump errors properly.
+Tried the whole `pg_dump` thing first. Faced some errors while importing the dump. The usual headache. And honestly? I was way too tired to debug the esoteric dump errors properly.
 
 Was sitting hopeless the it hit me - why mess with dumps when I could just copy the entire Docker volume? I'm on the same VM, so this should be easy despite the ugly look of it.
 
