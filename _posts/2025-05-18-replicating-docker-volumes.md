@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Replicating docker volumes: A Late-Night Hack"
-date:   2025-05-26 12:00:00 -0500
+title: "Replicating docker volumes: A Late-Night Hack"
+date: 2025-05-18 12:06:00 +0000
 categories: technical-writeups
 ---
 
