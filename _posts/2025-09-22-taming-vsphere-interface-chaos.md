@@ -242,7 +242,7 @@ Notice how:
 - **Networks without IPs** (Provider) share the same MAC across VMs since they use VLAN-based hashing
 - **Interface names are consistent** across all VM types for the same logical networks
 
-Now your Ansible playbooks or any other automation tools can safely reference `ens36` for example for storage across all VM types.
+Now Ansible playbooks or any other automation tools can safely reference `ens36` for example for storage across all VM types.
 
 ## Results  
 
