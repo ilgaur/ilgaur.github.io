@@ -21,7 +21,7 @@ In virtualized environments like vSphere, interfaces typically follow the `ens*`
 
 ## The problem  
 
-*Environment*  
+Environment:
 - Ubuntu 24.04 templates cloned by Terraform vSphere provider 2.12.0.  
 - Port groups:  
   A = External (172.17.1.0/24)  
@@ -30,7 +30,7 @@ In virtualized environments like vSphere, interfaces typically follow the `ens*`
   D = Provider (172.17.70.0/24)  
   E = Storage (172.17.150.0/24)  
 
-*Symptoms*  
+Symptoms:
 1. Controllers (A + B + D + E) and Ceph nodes (A + E) both boot with `ens33`, `ens34`, … but the label-to-network mapping changes every time vSphere decides to shuffle PCI slots.  
 2. On a compute node the storage back-end might be `ens36`; on a Ceph OSD the same /24 shows up as `ens33`.  
 3. Ansible playbooks and cloud-init templates that relied on the interface schemas being consistent in their setup and naming would then fail.
@@ -187,8 +187,6 @@ data "template_file" "netplan" {
 Each VM type ships its own netplan template so we can omit sections for networks it doesn't use.
 
 ## The transformation in action
-
-Here's what happens when you deploy the same OpenStack role across different VM types:
 
 ### Scenario: Storage network should always be accessible via `ens36`
 
