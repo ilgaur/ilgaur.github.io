@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Taming vSphere Interface Chaos: Deterministic MACs + Netplan Match Rules"
+title: "Taming Interface Chaos in vSphere: Deterministic MACs + Netplan Match Rules"
 date: 2025-09-22 12:06:00 +0000
 categories: technical-writeups
 ---
