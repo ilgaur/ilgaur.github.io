@@ -5,7 +5,7 @@ date: 2025-09-22 12:06:00 +0000
 categories: technical-writeups
 ---
 
-When you run a mixed OpenStack stack (controllers, computes, Ceph OSDs, Neutron nodes, a deployer bastion) on VMware vSphere, every VM type tends to expose a different number of NICs. Unless you act, Linux will label those NICs purely by PCIe discovery order (the sequence in which the kernel detects PCI devices during boot) so ens33 on one VM may be the storage back‐end while ens33 on another is the external API. this leads to expecting an automation that ensures: "storage is always ens36, or API is always ens40"
+When you run a mixed OpenStack deployment (controllers, computes, Ceph OSDs, Neutron nodes, a deployer bastion) on VMware vSphere, every VM type tends to expose a different number of NICs. Unless you act, Linux will label those NICs purely by PCIe discovery order (the sequence in which the kernel detects PCI devices during boot) so ens33 on one VM may be the storage back‐end while ens33 on another is the external API. this leads to expecting an automation that ensures: "storage is always ens36, or API is always ens40"
 
 Below is my recipe to achieve *identical interface names on every VM*, regardless of how many networks each VM attaches to.
 
