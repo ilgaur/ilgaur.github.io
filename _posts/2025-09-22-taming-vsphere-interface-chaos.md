@@ -5,7 +5,7 @@ date: 2025-09-22 12:06:00 +0000
 categories: technical-writeups
 ---
 
-When you run a mixed OpenStack deployment (controllers, computes, Ceph OSDs, Neutron nodes, a deployer bastion) on VMware vSphere, every VM type tends to expose a different number of NICs. Unless you act, Linux will label those NICs purely by PCIe discovery order (the sequence in which the kernel detects PCI devices during boot) so ens33 on one VM may be the storage back‐end while ens33 on another is the external API. this leads to expecting an automation that ensures: "storage is always ens36, or API is always ens40"
+When you run a mixed OpenStack deployment on VMware vSphere, every VM type tends to expose a different number of NICs. Unless you act, Linux will label those NICs purely by PCIe discovery order (the sequence in which the kernel detects PCI devices during boot) so ens33 on one VM may be the storage back‐end while ens33 on another is the external API. this leads to expecting an automation that ensures: "storage is always ens36, or API is always ens40"
 
 Below is my recipe to achieve *identical interface names on every VM*, regardless of how many networks each VM attaches to.
 
@@ -106,7 +106,7 @@ mac = format("00:50:56:%02x:%02x:%02x",
 Rules:  
 - Always fix the first three bytes to VMware’s OUI.  
 - Derive the lower three bytes from the IP so they are unique per address yet deterministic.  
-- For NICs that carry no IP (e.g., Neutron external), hash the VLAN ID instead.
+- For NICs with no IP assigned (e.g., Neutron external), hash the VLAN ID instead.
 
 ### 3 - Render netplan with `match`/`set-name`  
 
@@ -150,7 +150,7 @@ network:
       set-name: ens36
       addresses: [172.17.150.146/24]
 
-    # Provider / Neutron external (no IP)
+    # Provider / Neutron external (no IP assigned)
     ens37:
       match:
         macaddress: 00:50:56:11:46:00
@@ -213,33 +213,33 @@ Compute VM (5 NICs):
 **After (deterministic naming):**
 ```
 Controller VM (.143):
-├─ ens33 → External (172.17.1.143)     [MAC: 00:50:56:11:01:8f]
-├─ ens34 → Management (172.17.10.143)  [MAC: 00:50:56:11:0a:8f]
-├─ ens36 → Storage (172.17.150.143)    [MAC: 00:50:56:11:9c:8f] ✓
-└─ ens37 → Provider (no IP)            [MAC: 00:50:56:11:46:00]
+├─ ens33 → External (172.17.1.143)      [MAC: 00:50:56:11:01:8f]
+├─ ens34 → Management (172.17.10.143)   [MAC: 00:50:56:11:0a:8f]
+├─ ens36 → Storage (172.17.150.143)     [MAC: 00:50:56:11:9c:8f] ✓
+└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
 
 Ceph OSD VM (.140):
-├─ ens33 → External (172.17.1.140)     [MAC: 00:50:56:11:01:8c]
-└─ ens36 → Storage (172.17.150.140)    [MAC: 00:50:56:11:9c:6c] ✓
+├─ ens33 → External (172.17.1.140)      [MAC: 00:50:56:11:01:8c]
+└─ ens36 → Storage (172.17.150.140)     [MAC: 00:50:56:11:9c:6c] ✓
 
 Compute VM (.146):
-├─ ens33 → External (172.17.1.146)     [MAC: 00:50:56:11:01:32]
-├─ ens34 → Management (172.17.10.146)  [MAC: 00:50:56:11:0a:32]
-├─ ens35 → Tenant (172.17.20.146)      [MAC: 00:50:56:11:14:32]
-├─ ens36 → Storage (172.17.150.146)    [MAC: 00:50:56:11:9c:32] ✓
-└─ ens37 → Provider (no IP)            [MAC: 00:50:56:11:46:00]
+├─ ens33 → External (172.17.1.146)      [MAC: 00:50:56:11:01:32]
+├─ ens34 → Management (172.17.10.146)   [MAC: 00:50:56:11:0a:32]
+├─ ens35 → Tenant (172.17.20.146)       [MAC: 00:50:56:11:14:32]
+├─ ens36 → Storage (172.17.150.146)     [MAC: 00:50:56:11:9c:32] ✓
+└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
 
 Network VM (.149):
-├─ ens33 → External (172.17.1.149)     [MAC: 00:50:56:11:01:95]
-├─ ens34 → Management (172.17.10.149)  [MAC: 00:50:56:11:0a:95]
-├─ ens35 → Tenant (172.17.20.149)      [MAC: 00:50:56:11:14:95]
-└─ ens37 → Provider (no IP)            [MAC: 00:50:56:11:46:00]
+├─ ens33 → External (172.17.1.149)      [MAC: 00:50:56:11:01:95]
+├─ ens34 → Management (172.17.10.149)   [MAC: 00:50:56:11:0a:95]
+├─ ens35 → Tenant (172.17.20.149)       [MAC: 00:50:56:11:14:95]
+└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
 ```
 
 Notice how:
 - **Storage network (172.17.150.x)** is always on `ens36` regardless of VM type
 - **Each VM gets unique MACs** derived from its individual IP address (last octet: 8f, 8c, 32, 95)
-- **Networks without IPs** (Provider) share the same MAC across VMs since they use VLAN-based hashing
+- **Networks with no IP assigned** (Provider) share the same MAC across VMs since they use VLAN-based hashing
 - **Interface names are consistent** across all VM types for the same logical networks
 
 Now Ansible playbooks or any other automation tools can safely reference `ens36` for example for storage across all VM types.
