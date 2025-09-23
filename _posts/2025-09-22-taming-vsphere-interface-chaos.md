@@ -193,21 +193,21 @@ Each VM type ships its own netplan template so we can omit sections for networks
 **Before:**
 ```
 Controller VM (4 NICs):
-├─ ens33 → External (172.17.1.x)
-├─ ens34 → Management (172.17.10.x)  
-├─ ens35 → Provider (172.17.70.x)
-└─ ens36 → Storage (172.17.150.x) ✓
+├─ ens33 → External   (172.17.1.x)     
+├─ ens34 → Management (172.17.10.x)    
+├─ ens35 → Provider   (172.17.70.x)    
+└─ ens36 → Storage    (172.17.150.x)   ✓
 
 Ceph OSD VM (2 NICs):
-├─ ens33 → External (172.17.1.x)
-└─ ens34 → Storage (172.17.150.x) ✗ Wrong interface!
+├─ ens33 → External   (172.17.1.x)     
+└─ ens34 → Storage    (172.17.150.x)   ✗ Wrong interface!
 
 Compute VM (5 NICs):
-├─ ens33 → External (172.17.1.x)
-├─ ens34 → Management (172.17.10.x)
-├─ ens35 → Tenant (172.17.20.x)
-├─ ens36 → Provider (172.17.70.x)
-└─ ens37 → Storage (172.17.150.x) ✗ Wrong interface!
+├─ ens33 → External   (172.17.1.x)     
+├─ ens34 → Management (172.17.10.x)    
+├─ ens35 → Tenant     (172.17.20.x)    
+├─ ens36 → Provider   (172.17.70.x)    
+└─ ens37 → Storage    (172.17.150.x)   ✗ Wrong interface!
 ```
 
 **After (deterministic naming):**
