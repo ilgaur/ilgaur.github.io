@@ -20,8 +20,6 @@
 
 title: Ilgar's tech musings
 email: ilgardadashi@gmail.com 
-description: >- # this means to ignore newlines until "baseurl:"
-  What I am doing, what I have done, and what I have learned along the way.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ilgar.xyz" # the base hostname & protocol for your site, e.g. http://example.com
   #twitter_username: jekyllrb
