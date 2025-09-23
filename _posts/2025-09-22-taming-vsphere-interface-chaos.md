@@ -213,27 +213,27 @@ Compute VM (5 NICs):
 **After (deterministic naming):**
 ```
 Controller VM (.143):
-├─ ens33 → External (172.17.1.143)      [MAC: 00:50:56:11:01:8f]
+├─ ens33 → External   (172.17.1.143)    [MAC: 00:50:56:11:01:8f]
 ├─ ens34 → Management (172.17.10.143)   [MAC: 00:50:56:11:0a:8f]
-├─ ens36 → Storage (172.17.150.143)     [MAC: 00:50:56:11:9c:8f] ✓
-└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
+├─ ens36 → Storage    (172.17.150.143)  [MAC: 00:50:56:11:9c:8f] ✓
+└─ ens37 → Provider   (no IP assigned)  [MAC: 00:50:56:11:46:00]
 
 Ceph OSD VM (.140):
-├─ ens33 → External (172.17.1.140)      [MAC: 00:50:56:11:01:8c]
-└─ ens36 → Storage (172.17.150.140)     [MAC: 00:50:56:11:9c:6c] ✓
+├─ ens33 → External   (172.17.1.140)    [MAC: 00:50:56:11:01:8c]
+└─ ens36 → Storage    (172.17.150.140)  [MAC: 00:50:56:11:9c:6c] ✓
 
 Compute VM (.146):
-├─ ens33 → External (172.17.1.146)      [MAC: 00:50:56:11:01:32]
+├─ ens33 → External   (172.17.1.146)    [MAC: 00:50:56:11:01:32]
 ├─ ens34 → Management (172.17.10.146)   [MAC: 00:50:56:11:0a:32]
-├─ ens35 → Tenant (172.17.20.146)       [MAC: 00:50:56:11:14:32]
-├─ ens36 → Storage (172.17.150.146)     [MAC: 00:50:56:11:9c:32] ✓
-└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
+├─ ens35 → Tenant     (172.17.20.146)   [MAC: 00:50:56:11:14:32]
+├─ ens36 → Storage    (172.17.150.146)  [MAC: 00:50:56:11:9c:32] ✓
+└─ ens37 → Provider   (no IP assigned)  [MAC: 00:50:56:11:46:00]
 
 Network VM (.149):
-├─ ens33 → External (172.17.1.149)      [MAC: 00:50:56:11:01:95]
+├─ ens33 → External   (172.17.1.149)    [MAC: 00:50:56:11:01:95]
 ├─ ens34 → Management (172.17.10.149)   [MAC: 00:50:56:11:0a:95]
-├─ ens35 → Tenant (172.17.20.149)       [MAC: 00:50:56:11:14:95]
-└─ ens37 → Provider (no IP assigned)    [MAC: 00:50:56:11:46:00]
+├─ ens35 → Tenant     (172.17.20.149)   [MAC: 00:50:56:11:14:95]
+└─ ens37 → Provider   (no IP assigned)  [MAC: 00:50:56:11:46:00]
 ```
 
 Notice how:
