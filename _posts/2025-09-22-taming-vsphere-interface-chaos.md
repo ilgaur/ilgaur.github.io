@@ -42,7 +42,7 @@ Symptoms:
    -  When you omit a MAC address, ESXi allocates one from 00:50:56:xx:yy:zz (VMware’s OUI) but with *random* lower 3 bytes per vNIC.  
    -  PCI devices are added to the VM in the order the template stored them. Clones that add/remove NICs shift that order.
 
-2. **Predictable Network Interface Names (PNIN)** in modern systemd  
+2. **Predictable Network Interface Names** in modern systemd  
    -  Ubuntu follows `ens<slot>` where *slot* is the PCI function number, not the vNIC index you configured. Different NIC counts ⇒ different slot numbers.  
    -  Result: identical port groups receive different `ens*` names between VM classes.
 
