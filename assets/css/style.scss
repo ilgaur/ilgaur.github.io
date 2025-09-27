@@ -171,21 +171,36 @@ blockquote {
 
 @media screen and (max-width: 600px) {
   .site-header .wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
   }
 
   .title-group {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .site-title {
     white-space: nowrap;
+    font-size: 1rem;
+  }
+
+  .site-title img {
+    height: 32px !important;
+    width: 32px !important;
+    margin-right: 8px !important;
   }
 
   .nav-links {
-    gap: 0.75rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+
+  .page-link {
+    font-size: 0.95rem;
+    line-height: 1.4;
   }
 
   .site-nav {
@@ -195,8 +210,14 @@ blockquote {
     border: none !important;
     padding: 0;
     text-align: initial;
-    width: 100%;
+    width: auto;
+    flex-shrink: 0;
     justify-content: flex-start;
+  }
+
+  .github-icon {
+    width: 18px;
+    height: 18px;
   }
 
   .github-label {
