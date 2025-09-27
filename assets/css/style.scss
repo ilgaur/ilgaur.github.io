@@ -1,0 +1,206 @@
+---
+---
+
+@import "minima";
+
+/* Dark mode toggle button */
+.btn-dark {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background: url('/assets/images/theme.png') right center / auto 26px no-repeat;
+  transition: background-position 0.4s steps(5);
+  cursor: pointer;
+  margin-left: 12px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.btn-dark:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: opacity 0.2s ease, transform 0.2s ease, background-position 0.4s steps(5);
+}
+
+/* Dark mode styles - Dark is default */
+:root {
+  --bg-color: #1a1a1a;
+  --text-color: #e1e1e1;
+  --header-bg: #2d2d2d;
+  --header-text: #ffffff;
+  --link-color: #4fa8f7;
+  --border-color: #444444;
+  --code-bg: #2d2d2d;
+  --code-text: #e1e1e1;
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #424242;
+  --header-bg: #f8f8f8;
+  --header-text: #424242;
+  --link-color: #2a7ae4;
+  --border-color: #e1e1e1;
+  --code-bg: #f8f8f8;
+  --code-text: #424242;
+}
+
+[data-theme="light"] .btn-dark {
+  background-position: left center;
+}
+
+/* Apply theme variables to Minima elements */
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.site-header {
+  background-color: var(--header-bg) !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}
+
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+}
+
+
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.github-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.site-title,
+.site-title:visited {
+  color: var(--header-text) !important;
+}
+
+.page-link {
+  color: var(--header-text) !important;
+}
+
+.page-link:hover {
+  opacity: 0.8;
+}
+
+a {
+  color: var(--link-color) !important;
+}
+
+a:visited {
+  color: var(--link-color) !important;
+}
+
+pre,
+code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border: 1px solid var(--border-color);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.post-meta {
+  color: var(--text-color) !important;
+  opacity: 0.7;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color) !important;
+}
+
+blockquote {
+  color: var(--text-color) !important;
+  opacity: 0.8;
+  border-left: 4px solid var(--border-color) !important;
+}
+
+.wrapper {
+  background-color: transparent !important;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--header-bg) !important;
+  border-top: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.footer-heading {
+  color: var(--text-color) !important;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-links {
+    gap: 0.75rem;
+  }
+
+  .site-nav {
+    position: static !important;
+    float: none;
+    background: transparent !important;
+    border: none !important;
+    padding: 0;
+    text-align: initial;
+  }
+
+  .github-label {
+    display: none;
+  }
+}
+
+/* Smooth transitions for all elements */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 600px) {
+  .btn-dark {
+    margin-left: 0.5rem;
+    width: 20px;
+    height: 20px;
+    background-size: auto 20px;
+  }
+}
