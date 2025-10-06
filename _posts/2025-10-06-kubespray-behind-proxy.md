@@ -93,14 +93,20 @@ ssh worker-1 'curl -x 172.16.10.1:12334 https://icanhazip.com'
 
 ## Debugging Failed Downloads
 
-When downloads fail, Kubespray hides the actual error by default. To see what's really happening, run with the `unsafe_show_logs` flag:
+When downloads fail, Kubespray hides the actual error by default. To see what's really happening, add `unsafe_show_logs: true` to your `inventory/group_vars/all/all.yml`:
+
+```yaml
+unsafe_show_logs: true
+```
+
+Then run with verbose output:
 
 ```bash
-# Run with unsafe_show_logs to see actual URLs and errors
 ansible-playbook -i inventory/hosts.yml kubespray/cluster.yml \
-  --become --tags download -vvv \
-  -e '{"unsafe_show_logs": true}'
+  --become --tags download -vvv
 ```
+
+Note: This needs to be in the inventory file, not passed as `-e` on the command line.
 
 ## Alternative Approach
 
