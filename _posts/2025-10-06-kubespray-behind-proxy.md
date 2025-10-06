@@ -5,8 +5,6 @@ date: 2025-10-06 10:00:00 +0000
 categories: technical-writeups
 ---
 
-# Getting Kubespray to Work Behind a Proxy: Lessons from a Bastion-Based Deployment
-
 Setting up Kubernetes clusters with Kubespray in environments where sanctions or network restrictions block access to essential repositories can be challenging. In these situations, you typically need a proxy to reach container registries and package repositories that would otherwise be unreachable. After spending considerable time troubleshooting HTTP 403 errors and mysterious download failures, here's a practical guide based on deploying a multi-node cluster through a bastion host setup.
 
 ## The Architecture Pattern
